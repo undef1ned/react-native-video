@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "keymirror": "0.1.1",
+    "react-native-full-screen": "0.0.2",
     "react-native-windows": "0.41.0-rc.0"
   },
   "scripts": {
