@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlaybackException;
-import com.google.android.exoplayer2.ExoPlayer;
+import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.PlaybackParameters;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.Timeline;
@@ -167,7 +167,7 @@ public final class ExoPlayerView extends FrameLayout {
     }
 
     private final class ComponentListener implements SimpleExoPlayer.VideoListener,
-            TextRenderer.Output, ExoPlayer.EventListener, MetadataRenderer.Output {
+            TextRenderer.Output, Player.EventListener, MetadataRenderer.Output {
 
         // TextRenderer.Output implementation
 
@@ -199,6 +199,11 @@ public final class ExoPlayerView extends FrameLayout {
         @Override
         public void onLoadingChanged(boolean isLoading) {
             // Do nothing.
+        }
+
+        @Override
+        public void onRepeatModeChanged(@Player.RepeatMode int repeatMode) {
+
         }
 
         @Override
