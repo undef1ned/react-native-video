@@ -1,7 +1,8 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import {StyleSheet, requireNativeComponent, NativeModules, View, Image} from 'react-native';
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 import VideoResizeMode from './VideoResizeMode.js';
+import  PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   base: {
