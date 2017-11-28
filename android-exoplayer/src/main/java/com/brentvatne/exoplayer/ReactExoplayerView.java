@@ -19,6 +19,7 @@ import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.Player;
+import com.google.android.exoplayer2.Player.DiscontinuityReason;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.Format;
 import com.google.android.exoplayer2.PlaybackParameters;
@@ -196,6 +197,26 @@ class ReactExoplayerView extends FrameLayout implements
 
     public void cleanUpResources() {
         stopPlayback();
+    }
+
+    @Override
+    public void onSeekProcessed() {
+      // Do nothing.
+    }
+
+    @Override
+    public void onPositionDiscontinuity(@DiscontinuityReason int reason) {
+        if (playerNeedsSource) {
+            // This will only occur if the user has performed a seek whilst in the error state. Update the
+            // resume position so that if the user then retries, playback will resume from the position to
+            // which they seeked.
+            updateResumePosition();
+        }
+      // Do nothing.
+    }
+    @Override
+    public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
+      // Do nothing.
     }
 
 
@@ -460,15 +481,15 @@ class ReactExoplayerView extends FrameLayout implements
         }
     }
 
-    @Override
-    public void onPositionDiscontinuity() {
-        if (playerNeedsSource) {
-            // This will only occur if the user has performed a seek whilst in the error state. Update the
-            // resume position so that if the user then retries, playback will resume from the position to
-            // which they seeked.
-            updateResumePosition();
-        }
-    }
+    // @Override
+    // public void onPositionDiscontinuity() {
+    //     if (playerNeedsSource) {
+    //         // This will only occur if the user has performed a seek whilst in the error state. Update the
+    //         // resume position so that if the user then retries, playback will resume from the position to
+    //         // which they seeked.
+    //         updateResumePosition();
+    //     }
+    // }
 
     @Override
     public void onTimelineChanged(Timeline timeline, Object manifest) {
